@@ -123,4 +123,7 @@ export const audioConfig = {
     /**点击音效 */
     yxSound4: "audio/Click4",
 
+    clickRight:"audio/right",
+
+    clickFalse:"audio/false",
 }

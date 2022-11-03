@@ -42,6 +42,9 @@ export default class NewClass extends cc.Component {
 
     canClick: boolean = true
 
+    /**点错的次数 */
+    falseTime: number = 0
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
@@ -69,20 +72,27 @@ export default class NewClass extends cc.Component {
         let pos = eventTouch.target.convertToNodeSpaceAR(touchPos)
 
         let selected = false
-        for (let i = 0; i < eventTouch.target.children.length; i++) {
+        for (let i = 1; i < eventTouch.target.children.length; i++) {
             let child = eventTouch.target.children[i]
             let rect = child.getBoundingBox()
 
-            if(rect.contains(pos)){
+            if (rect.contains(pos)) {
                 selected = true
             }
 
             if (rect.contains(pos) && child.active == false) {
                 this.grid0.children[i].active = true
                 this.grid1.children[i].active = true
+
+                this.grid0.children[0].children[i - 1].name = 'selected'
+                this.grid1.children[0].children[i - 1].name = 'selected'
+
                 this.selectNum++
 
-                let url = `pic/tip${GameUtil.CURLEVEL}_${i}`
+                AudioMgr.playAudioEffect(audioConfig.clickRight);
+
+
+                let url = `pic/tip${GameUtil.CURLEVEL}_${i - 1}`
                 let sprite = this.tip.getComponent(cc.Sprite)
                 cc.resources.load(url, cc.SpriteFrame, (err, spriteFrame: cc.SpriteFrame) => {
                     sprite.spriteFrame = spriteFrame;
@@ -91,6 +101,8 @@ export default class NewClass extends cc.Component {
         }
 
         if (!selected) {
+            AudioMgr.playAudioEffect(audioConfig.clickFalse);
+
             let tag = cc.instantiate(this.tagErr)
             tag.parent = eventTouch.target
             tag.setPosition(pos)
@@ -98,6 +110,12 @@ export default class NewClass extends cc.Component {
             this.scheduleOnce(() => {
                 tag.destroy()
             }, 0.3)
+
+            this.falseTime++
+            if (this.falseTime == 3) {
+                this.unschedule(this.timeHanlder)
+                this.gameLose()
+            }
         }
 
         if (this.selectNum == this.difNum) {
@@ -113,10 +131,11 @@ export default class NewClass extends cc.Component {
     }
 
     gameStart() {
-        for (let i = 0; i < this.grid0.children.length; i++) {
+        for (let i = 1; i < this.grid0.children.length; i++) {
             this.grid0.children[i].active = false
             this.grid1.children[i].active = false
         }
+        this.falseTime = 0
 
         this.selectNum = 0
         let sprite = this.tip.getComponent(cc.Sprite)
@@ -129,6 +148,18 @@ export default class NewClass extends cc.Component {
         this.schedule(this.timeHanlder, 1)
 
         this.canClick = true
+
+        let tipPanel1 = this.grid0.children[0]
+        let tipPanel2 = this.grid1.children[0]
+
+        for (let i = 0; i < tipPanel1.children.length; i++) {
+            tipPanel1.children[i].name = 'unSelect'
+
+        }
+
+        for (let i = 0; i < tipPanel2.children.length; i++) {
+            tipPanel2.children[i].name = 'unSelect'
+        }
     }
 
     /**
@@ -152,16 +183,41 @@ export default class NewClass extends cc.Component {
         this.node.destroy();
     }
 
-    /**音乐点击*/
-    private musicBool:boolean = true;
-    private soundBtnClick(){
+    private btnTip() {
         AudioMgr.playAudioEffect(audioConfig.WordClick);
-        if(this.musicBool){
+
+        let tipPanel1 = this.grid0.children[0]
+        let tipPanel2 = this.grid1.children[0]
+
+        for (let i = 0; i < tipPanel1.children.length; i++) {
+            let tipNode = tipPanel1.children[i]
+            console.log(`tipNode${i}.name:`+tipNode.name)
+            if (tipNode.name != 'selected' && tipNode.getComponent(cc.Animation)) {
+                tipNode.getComponent(cc.Animation).play()
+            }
+        }
+
+        for (let i = 0; i < tipPanel2.children.length; i++) {
+            let tipNode = tipPanel2.children[i]
+            console.log(`tipNode${i}.name:`+tipNode.name)
+            if (tipNode.name != 'selected' && tipNode.getComponent(cc.Animation)) {
+                tipNode.getComponent(cc.Animation).play()
+            }
+        }
+
+
+    }
+
+    /**音乐点击*/
+    private musicBool: boolean = true;
+    private soundBtnClick() {
+        AudioMgr.playAudioEffect(audioConfig.WordClick);
+        if (this.musicBool) {
             this.musicBool = false;
             // this.musicCloseBg.active = true;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, false);
             AudioMgr.pauseBGMusic();
-        }else{
+        } else {
             this.musicBool = true;
             // this.musicCloseBg.active = false;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, true);
