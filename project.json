@@ -1,0 +1,8 @@
+{
+  "engine": "cocos2d-html5",
+  "packages": "packages",
+  "version": "2.4.1",
+  "name": "weiCarGame",
+  "id": "6d5747d6-e167-4126-9d19-abeece53a101",
+  "isNew": false
+}
