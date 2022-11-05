@@ -5,102 +5,192 @@ import ResultLogic from "./ResultLogic";
 
 const {ccclass, property} = cc._decorator;
 
-const PIPE_GRID_W = 164;           //格子宽度
-const PIPE_GRID_H = 164;           //格子高度
-const PIPE_Time = 60;           //游戏时间
-const PIPE_LEVEL_DATA = [          //几列*几行
-    [3, 3],
-    [3, 3],
-    [3, 3],
-    [3, 4],
-    [3, 4],
-    [3, 4],
-    [4, 4],
-    [4, 4],
-    [4, 5],
-    [4, 5],
-];
+// const PIPE_GRID_W = 164;           //格子宽度
+// const PIPE_GRID_H = 164;           //格子高度
+const PIPE_Time = 90;           //游戏时间
+// const PIPE_LEVEL_DATA = [          //几列*几行
+//     [3, 3],
+//     [3, 3],
+//     [3, 3],
+//     [3, 4],
+//     [3, 4],
+//     [3, 4],
+//     [4, 4],
+//     [4, 4],
+//     [4, 5],
+//     [4, 5],
+// ];
 
-const PIPE_LEVEL_PIPE_DATA = [          //管道数量  直的 弯的
-    [2, 2],
-    [2, 2],
-    [2, 2],
-    [3, 2],
-    [3, 2],
-    [3, 2],
-    [3, 2],
-    [4, 2],
-    [3, 4],
-    [4, 4],
-];
+// const PIPE_LEVEL_PIPE_DATA = [          //管道数量  直的 弯的
+//     [2, 2],
+//     [2, 2],
+//     [2, 2],
+//     [3, 2],
+//     [3, 2],
+//     [3, 2],
+//     [3, 2],
+//     [4, 2],
+//     [3, 4],
+//     [3, 4],
+// ];
 
-const PIPE_OUT = [              //管道出口
-    [[0,2],[1,2],[2,2]],
-    [[1,2],[2,2]],
-    [[1,2]],
-    [[0,3],[1,3],[2,3]],
-    [[1,3],[2,3]],
-    [[1,3]],
-    [[1,3]],
-    [[2,3]],
-    [[2,4]],
-    [[3,4]],
+// const PIPE_OUT = [              //管道出口
+//     [[0,2],[1,2],[2,2]],
+//     [[1,2],[2,2]],
+//     [[1,2]],
+//     [[0,3],[1,3],[2,3]],
+//     [[1,3],[2,3]],
+//     [[1,3]],
+//     [[1,3]],
+//     [[2,3]],
+//     [[2,4]],
+//     [[2,4]],
+//
+// ]
+
+const PIPE_LEVEL_DATA = [     //关卡地图信息  [0(直管)/1（弯管），0,90,180,270（旋转角度）]
+    [
+        [1,270],[0,90],[0,90],[1,90],
+        [],[],[],[0,0],
+        [],[],[],[0,0],
+    ],
+  [
+       [0,0],[],[],[],
+       [0,0],[],[],[],
+       [1,270],[0,90],[0,90],[1,90],
+    ],
+  [
+       [0,0],[],[],[],
+       [1,270],[0,90],[1,0],[],
+       [],[],[1,270],[1,0],
+    ],
+  [
+       [1,270],[1,90],[],[],
+       [],[0,0],[],[],
+       [],[1,0],[0,90],[1,180],
+    ],
+  [
+       [1,270],[0,0],[1,0],[],
+       [],[],[0,0],[],
+       [],[],[1,90],[1,90],
+    ],
+  [
+       [1,270],[0,90],[1,90],[],
+       [],[1,0],[1,90],[],
+       [],[1,0],[0,90],[1,0],
+    ],
+  [
+       [1,0],[1,90],[],[],
+       [1,0],[1,90],[],[],
+       [1,0],[0,90],[0,90],[1,90],
+    ],
+  [
+       [1,0],[1,90],[],[],
+       [1,180],[1,0],[1,0],[1,0],
+       [1,180],[0,0],[1,0],[0,0],
+    ],
+  [
+       [1,0],[1,90],[],[],
+       [],[0,0],[1,0],[1,90],
+       [],[1,0],[1,90],[0,0],
+    ],
+  [
+       [1,270],[1,90],[1,270],[1,0],
+       [1,180],[1,0],[0,0],[0,0],
+       [1,180],[0,0],[1,90],[0,0],
+    ],
+
 
 ]
 
-const enemyPos = [
-    [164,520],
-    [164,520],
-    [164,520],
-    [-164,520],
-    [-164,520],
-    [-164,520],
-    [248,520],
-    [-248,520],
-    [-248,520],
-    [-248,520],
+const PIPE_LEVEL_DATA_TARGET = [    // 关卡目标地图信息
+    [
+        [1,90],[0,0],[0,0],[1,270],
+        [],[],[],[0,90],
+        [],[],[],[0,90],
+    ],
+    [
+        [0,90],[],[],[],
+        [0,90],[],[],[],
+        [1,90],[0,0],[0,0],[1,270],
+    ],
+    [
+        [0,90],[],[],[],
+        [1,90],[0,0],[1,270],[],
+        [],[],[1,90],[1,270],
+    ],
+    [
+        [1,90],[1,270],[],[],
+        [],[0,90],[],[],
+        [],[1,90],[0,0],[1,270],
+    ],
+    [
+        [1,90],[0,0],[1,270],[],
+        [],[],[0,90],[],
+        [],[],[1,90],[1,270],
+    ],
+    [
+        [1,90],[0,0],[1,270],[],
+        [],[1,0],[1,180],[],
+        [],[1,90],[0,0],[1,270],
+    ],
+    [
+        [1,90],[1,270],[],[],
+        [1,0],[1,180],[],[],
+        [1,90],[0,0],[0,0],[1,270],
+    ],
+    [
+        [1,90],[1,270],[],[],
+        [1,0],[1,180],[1,0],[1,270],
+        [1,90],[0,0],[1,180],[0,90],
+    ],
+    [
+        [1,90],[1,270],[],[],
+        [],[0,90],[1,0],[1,270],
+        [],[1,90],[1,180],[0,90],
+    ],
+    [
+        [1,90],[1,270],[1,0],[1,270],
+        [1,0],[1,180],[0,90],[0,90],
+        [1,90],[0,0],[1,180],[0,90],
+    ],
 
+]
+
+const PIPE_SHU_POS = [   //弯的水管不同角度的坐标
+    [23,-20],
+    [23,25],
+    [-25,23],
+    [-20,-20],
 ]
 
 @ccclass
 export default class PipeLogic extends cc.Component {
 
-    @property(cc.Node) pipeNode: cc.Node = null;     //选择管道节点
-    @property(cc.Node) posNode: cc.Node = null;
-    @property(cc.Node) draggingNode: cc.Node = null;       //拖拽节点
-    @property(cc.Label) straightLabel: cc.Label = null;
-    @property(cc.Label) curveLabel: cc.Label = null;
-    @property(cc.Label) timeLabel: cc.Label = null;
-    @property(cc.Label) levelLabel: cc.Label = null;
 
-    @property(cc.Prefab) gridPre: cc.Prefab = null;  //空格子
+    @property(cc.Label) timeLabel: cc.Label = null;   //时间文本，暂时没用到
+    @property(cc.Label) levelLabel: cc.Label = null;  //关卡文本
 
-    @property(cc.Sprite) bg:cc.Sprite = null;
+    // @property([cc.SpriteFrame]) pipeIcons: cc.SpriteFrame[] = [];
+    // @property([cc.SpriteFrame]) gridIcons: cc.SpriteFrame[] = [];
+    // @property([cc.SpriteFrame]) bgIcons: cc.SpriteFrame[] = [];
+    @property(cc.Node) map:cc.Node = null;    //地图父节点
 
-    @property([cc.SpriteFrame]) pipeIcons: cc.SpriteFrame[] = [];
-    @property([cc.SpriteFrame]) gridIcons: cc.SpriteFrame[] = [];
-    @property([cc.SpriteFrame]) bgIcons: cc.SpriteFrame[] = [];
-
-    @property(ResultLogic) resultLogic:ResultLogic = null;
-
-    @property(cc.Node) enemyNode:cc.Node = null;
-
-    // @property(cc.Sprite) renNode:cc.Node = null;
+    @property(ResultLogic) resultLogic:ResultLogic = null;   //结算脚本
+    @property(cc.Sprite) timeImg:cc.Sprite = null;  //时间进度条
 
     mapData; //位置信息
 
     curve: number = 0;   //弯的
     straight: number = 0;  //直的
-    changePipeID: number = -1;
-    changeExId: number = -1;
-    changeExType: number = -1;
+    // changePipeID: number = -1;
+    // changeExId: number = -1;
+    // changeExType: number = -1;
     level: number = 0;
     time:number = 0;
     maxTime:number = 0;
 
-    // private renX = [165,];
-
-    outPos;
+    // outPos;
 
     onLoad(){
         Observer.on("aa",function(id:any){
@@ -108,65 +198,56 @@ export default class PipeLogic extends cc.Component {
         },this);
     }
 
-    onEnable(){
-        // this.onDrag();
+    // 竖的   0 （23，-20）   90（23,25）  180（-25,23）   270（-20，-20）
 
+    protected onEnable() {
+        // this.init(0);
         let levNum = Number(GameDataMgr.getDataByType(E_GameData_Type.ClickPassLv));
         let lev = levNum;
         this.init(lev);
+       
     }
+
 
     /**
      * 初始化
      * @param level  关卡，0开始，超出配置均已最高值算
      */
     init(level: number) {
-        this.onDrag();
-        console.log("走了没" + level);
         this.resultLogic.node.active = false;
         if (level >= PIPE_LEVEL_DATA.length) {
             level = PIPE_LEVEL_DATA.length - 1;
         }
-        this.enemyNode.x = enemyPos[level][0];
         this.mapData = [];
-        this.outPos = [];
-        this.posNode.destroyAllChildren();
-        for (let i = 0; i < PIPE_LEVEL_DATA[level][1]; i++) {
-            for (let j = 0; j < PIPE_LEVEL_DATA[level][0]; j++) {
-                let vec2 = cc.v2(-PIPE_GRID_W * PIPE_LEVEL_DATA[level][0] / 2 + PIPE_GRID_W / 2 + PIPE_GRID_W * j, -PIPE_GRID_H / 2 - PIPE_GRID_H * i);
-                this.mapData.push(vec2);
-                let node = cc.instantiate(this.gridPre);
-                let pipeItem = node.getComponent(PipeItem) || node.addComponent(PipeItem);
-                pipeItem.init(0);
-                node.setParent(this.posNode);
-                node.setPosition(vec2);
-                node.opacity = 1;
-                let o = PIPE_OUT[level].find((v)=>{return  v[0] == j && v[1] == i})
-                if(o != undefined){
-                    this.outPos.push(vec2);
-                }
-            }
-        }
-        console.log(this.outPos);
+        // this.outPos = [];
+
+        // console.log(this.outPos);
 
         this.level = level;
         this.time = 0;
         this.maxTime = PIPE_Time;
-        this.curve = PIPE_LEVEL_PIPE_DATA[level][1];
-        this.straight = PIPE_LEVEL_PIPE_DATA[level][0];
-        this.changePipeID = 0;
-        this.changeExId = -1;
-        this.changeExType = 0;
-        this.draggingNode.active = false;
-        this.curveLabel.string = `${this.curve}`;
-        this.straightLabel.string = `${this.straight}`;
-        this.timeLabel.string = `${this.maxTime -this.time}`;
-        this.levelLabel.string = `Level ${this.level+1}`;
-        this.bg.spriteFrame = this.bgIcons[this.level];
 
-        this.schedule(this.addTime,1,cc.macro.REPEAT_FOREVER,1);
-        console.log(this.posNode);
+        // this.timeLabel.string = `${this.maxTime -this.time}`;
+        this.levelLabel.string = `Level ${this.level+1}`;
+        this.timeImg.fillRange = 1;
+
+        // 初始化地图
+        for(let i = 0; i < this.map.childrenCount;i++){
+            this.map.children[i].children[0].active = PIPE_LEVEL_DATA[level][i].length > 0 && PIPE_LEVEL_DATA[level][i][0] == 0;
+            this.map.children[i].children[1].active = PIPE_LEVEL_DATA[level][i].length > 0 && PIPE_LEVEL_DATA[level][i][0] == 1;
+            if(this.map.children[i].children[0].active){
+                this.map.children[i].children[0].angle = PIPE_LEVEL_DATA[level][i][1];
+            }
+            if(this.map.children[i].children[1].active){
+                this.map.children[i].children[1].angle = PIPE_LEVEL_DATA[level][i][1];
+                this.map.children[i].children[1].position = new cc.Vec3(PIPE_SHU_POS[backNumber(PIPE_LEVEL_DATA[level][i][1])][0],PIPE_SHU_POS[backNumber(PIPE_LEVEL_DATA[level][i][1])][1],0);
+            }
+        }
+
+        this.schedule(this.addTime,0.1,cc.macro.REPEAT_FOREVER,1);
     }
+
+
 
     /**
      * 关卡内计时
@@ -179,666 +260,73 @@ export default class PipeLogic extends cc.Component {
             this.unscheduleAllCallbacks();
             return;
         }
-        this.time++;
-        this.timeLabel.string = `${this.maxTime -this.time}`;
+        this.time+=0.1;
+        // this.timeLabel.string = `${this.maxTime -this.time}`;
+        this.timeImg.fillRange = Math.max(0,Math.min(1,(this.maxTime - this.time)/this.maxTime)) ;
     }
 
-
-    //拖拽注册
-    onDrag() {
-        this.node.on(cc.Node.EventType.TOUCH_MOVE, this.touchMove, this);
-        this.node.on(cc.Node.EventType.TOUCH_START, this.touchStart, this);
-        this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.touchEnd, this);
-        this.node.on(cc.Node.EventType.TOUCH_END, this.touchEnd, this);
-
+    // 点击旋转
+    onClickRotation(event,data){
+        let a = parseInt(data);
+        if(this.map.children[a].children[0].active){
+            this.map.children[a].children[0].angle+=90;
+        }
+        if(this.map.children[a].children[1].active){
+            this.map.children[a].children[1].angle+=90;
+            this.map.children[a].children[1].position = new cc.Vec3(PIPE_SHU_POS[backNumber(this.map.children[a].children[1].angle)][0],PIPE_SHU_POS[backNumber(this.map.children[a].children[1].angle)][1],0);
+        }
+        this.checkResult();
     }
 
-    //拖拽注销
-    offDrag() {
-        this.node.off(cc.Node.EventType.TOUCH_MOVE, this.touchMove, this);
-        this.node.off(cc.Node.EventType.TOUCH_START, this.touchStart, this);
-        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.touchEnd, this);
-        this.node.off(cc.Node.EventType.TOUCH_END, this.touchEnd, this);
-    }
-
-    eventPos;
-
-    touchMove(event: cc.Touch) {
-        const p = event.getLocation();
-        this.draggingNode.setPosition(this.draggingNode.getParent().convertToNodeSpaceAR(p));
-
-    }
-
-    touchStart(event: cc.Touch) {
-        const p = event.getLocation();
-        this.eventPos = event.getLocation();
-
-        //判断是不是点击了上面没拉出来的管道
-        const borders = this.pipeNode.children.map(getBorder);
-        for (let i = 0; i < borders.length; i++) {
-            const b = borders[i];
-            if (
-                this.pipeNode.children[i].active && (
-                    p.x > b.left &&
-                    p.x < b.right &&
-                    p.y > b.bottom &&
-                    p.y < b.top)
-            ) {
-                if (i == 0 && this.straight > 0) {
-                    this.draggingNode.active = true;
-                    this.changePipeID = 1;
-                    this.draggingNode.getComponent(cc.Sprite).spriteFrame = this.pipeIcons[1];
-                    this.draggingNode.setPosition(this.draggingNode.getParent().convertToNodeSpaceAR(p));
-
-                    return;
-                } else if (i == 1 && this.curve > 0) {
-                    this.draggingNode.active = true;
-                    this.changePipeID = 2;
-                    this.draggingNode.getComponent(cc.Sprite).spriteFrame = this.pipeIcons[2];
-                    this.draggingNode.setPosition(this.draggingNode.getParent().convertToNodeSpaceAR(p));
-
-                    return;
-                }
-            }
-        }
-
-        //判断是不是点击了下方的管道
-        const borders1 = this.posNode.children.map(getBorder);
-        for (let i = 0; i < borders1.length; i++) {
-            const b = borders1[i];
-            if (
-                this.posNode.children[i].active && (
-                    p.x > b.left &&
-                    p.x < b.right &&
-                    p.y > b.bottom &&
-                    p.y < b.top) &&
-                this.posNode.children[i].opacity == 255
-            ) {
-                this.draggingNode.active = true;
-                let t = this.posNode.children[i].getComponent(PipeItem).type;
-                this.draggingNode.getComponent(cc.Sprite).spriteFrame = this.pipeIcons[t];
-                this.draggingNode.setPosition(this.draggingNode.getParent().convertToNodeSpaceAR(p));
-                this.changeExId = i;
-                this.changeExType = t;
-                // console.log('点到了下面格子');
-                return;
-            }
-        }
-
-        this.changePipeID = 0;
-        this.changeExId = -1;
-        this.changeExType = 0;
-    }
-
-    touchEnd(event: cc.Touch) {
-        const p = event.getLocation();
-        let vec2 = this.posNode.convertToNodeSpaceAR(p);
-
-        // 点击旋转？
-        if (Math.abs(event.getLocation().x - this.eventPos.x) < 5 && this.draggingNode.active) {
-            // console.log('dianji')
-            //将开始时坐标赋予触摸跟随节点
-            const borders = this.posNode.children.map(getBorder);
-            for (let i = 0; i < borders.length; i++) {
-                const b = borders[i];
-                if (
-                    this.posNode.children[i].active && (
-                        p.x > b.left &&
-                        p.x < b.right &&
-                        p.y > b.bottom &&
-                        p.y < b.top) &&
-                    this.posNode.children[i].opacity == 255
-                ) {   //找到了
-
-                    this.posNode.children[i].angle += 90;
-                    this.draggingNode.active = false;
-                    this.showW(i);
-                    
-                    // console.log(this.posNode.children[i].angle%360);
-                    this.checkResult();
-                    this.changeExId = -1;
-                    this.changeExType = 0;
-                   break;
-                }
-            }
-            this.draggingNode.active = false;
-
-            return;
-
-        }
-        // console.log(vec2);
-        // 从上方拖动下来的
-        if (this.changePipeID != 0) {
-            for (let i = 0; i < this.posNode.childrenCount; i++) {
-                if (Math.abs(vec2.x - (this.posNode.children[i].x)) < PIPE_GRID_W / 2 &&
-                    Math.abs(vec2.y - (this.posNode.children[i].y)) < PIPE_GRID_H / 2 &&
-                    this.posNode.children[i].opacity == 1 ) {
-                    console.log(i);
-                    this.draggingNode.active = false;
-                    this.posNode.children[i].opacity = 255;
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[this.changePipeID];
-                    this.posNode.children[i].getComponent(PipeItem).init(this.changePipeID);
-                    if (this.changePipeID == 1) {
-                        this.straight--;
-                    } else if (this.changePipeID == 2) {
-                        this.curve--;
-                    }
-                    this.curveLabel.string = `${this.curve}`;
-                    this.straightLabel.string = `${this.straight}`;
-                    this.changePipeID = 0;
-                    this.showW(i);
-                    this.checkResult();
-
-                    return;
-                }
-            }
-        }
-
-        // 拖动交换的
-        if (this.changeExType != 0) {
-            for (let i = 0; i < this.posNode.childrenCount; i++) {
-                if (Math.abs(vec2.x - (this.posNode.children[i].x)) < PIPE_GRID_W / 2 &&
-                    Math.abs(vec2.y - (this.posNode.children[i].y)) < PIPE_GRID_H / 2&&
-                    i != this.changeExId) {
-                    console.log(i);
-                    this.draggingNode.active = false;
-                    if (this.posNode.children[i].opacity == 1) {
-                        this.posNode.children[i].opacity = 255;
-                        this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[this.changeExType];
-                        this.posNode.children[i].getComponent(PipeItem).init(this.changeExType);
-                        this.posNode.children[this.changeExId].opacity = 1;
-                        this.posNode.children[this.changeExId].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[0];
-                        this.posNode.children[this.changeExId].getComponent(PipeItem).init(0);
-                       
-                    } else {
-                        let t = this.posNode.children[i].getComponent(PipeItem).type;
-                        this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[this.changeExType];
-                        this.posNode.children[i].getComponent(PipeItem).init(this.changeExType);
-                        this.posNode.children[this.changeExId].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[t];
-                        this.posNode.children[this.changeExId].getComponent(PipeItem).init(t);
-                        this.showW(this.changeExId);
-                    }
-                    this.showW(i);
-                    this.changeExId = 0;
-                    this.changeExType = 0;
-                    this.checkResult();
-
-                    return;
-                }
-            }
-        }
-
-        this.draggingNode.active = false;
-        this.changePipeID = 0;
-        this.changeExId = -1;
-        this.changeExType = 0;
-    }
-
-    showW(i){
-        console.log(this.posNode.childrenCount);
-        let t = this.posNode.children[i].getComponent(PipeItem).type;
-        if(t == 1){
-            if(this.posNode.children[i].y == this.posNode.children[0].y ){
-                console.log(this.posNode.children[i].angle);
-                if(this.posNode.children[i].angle%360 == 0 ){
-                
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[3];  //直的冒头
-                    this.posNode.children[i].children[0].anchorY = 0.45;
-                    this.posNode.children[i].children[0].angle = 0;
-
-
-                }else if(this.posNode.children[i].angle%360 == 180){
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[3];  //直的冒头
-                    this.posNode.children[i].children[0].anchorY = 0.45;
-                    this.posNode.children[i].children[0].angle = -180;
-
-                }else{
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[1];
-                    this.posNode.children[i].children[0].anchorY = 0.5;
-                    this.posNode.children[i].children[0].angle = 0;
-
-                }
-            }else if(this.posNode.children[i].y == this.posNode.children[this.posNode.childrenCount-1].y){
-                if(this.posNode.children[i].angle%360 == 180 ){
-                
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[3];  //直的冒头
-                    this.posNode.children[i].children[0].anchorY = 0.45;
-                    this.posNode.children[i].children[0].angle = 0;
-
-
-                }else if(this.posNode.children[i].angle%360 == 0){
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[3];  //直的冒头
-                    this.posNode.children[i].children[0].anchorY = 0.45;
-                    this.posNode.children[i].children[0].angle = -180;
-
-                }else{
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[1];
-                    this.posNode.children[i].children[0].anchorY = 0.5;
-                    this.posNode.children[i].children[0].angle = 0;
-
-                }
-            }
-            else{
-                this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[1];
-                this.posNode.children[i].children[0].anchorY = 0.5;
-            }
-        }else if(t == 2){
-            if(this.posNode.children[i].y == this.posNode.children[0].y){
-                if(this.posNode.children[i].angle%360 == 0 ){
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[4];
-                    this.posNode.children[i].children[0].scaleX = 1;
-                    this.posNode.children[i].children[0].angle = 0;
-
-                    this.posNode.children[i].children[0].anchorY = 0.45;
-                }else if(this.posNode.children[i].angle%360 == 90 ){
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[4];  //直的冒头
-                    this.posNode.children[i].children[0].scaleX = -1;
-                    this.posNode.children[i].children[0].angle = -90;
-                    this.posNode.children[i].children[0].anchorY = 0.45;
-                }else{
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[2];  
-                        this.posNode.children[i].children[0].scaleX = 1;
-                        this.posNode.children[i].children[0].angle = 0;
-                        this.posNode.children[i].children[0].anchorY = 0.5;
-                }
-            }else if(this.posNode.children[i].y == this.posNode.children[this.posNode.childrenCount-1].y){
-                if(this.posNode.children[i].angle%360 == 180 ){
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[4];
-                    this.posNode.children[i].children[0].scaleX = 1;
-                    this.posNode.children[i].children[0].angle = 0;
-
-                    this.posNode.children[i].children[0].anchorY = 0.45;
-                }else if(this.posNode.children[i].angle%360 == 270 ){
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[4];  //直的冒头
-                    this.posNode.children[i].children[0].scaleX = -1;
-                    this.posNode.children[i].children[0].angle = -90;
-                    this.posNode.children[i].children[0].anchorY = 0.45;
-                }else{
-                    this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[2];  
-                        this.posNode.children[i].children[0].scaleX = 1;
-                        this.posNode.children[i].children[0].angle = 0;
-                        this.posNode.children[i].children[0].anchorY = 0.5;
-                }
-
-            }else{
-                this.posNode.children[i].children[0].getComponent(cc.Sprite).spriteFrame = this.gridIcons[2];  
-                    this.posNode.children[i].children[0].scaleX = 1;
-                    this.posNode.children[i].children[0].angle = 0;
-                    this.posNode.children[i].children[0].anchorY = 0.5;
-            }
-        }
-    }
-
-    show;
-
-    /**
-     * 结果检测
-     */
-    checkResult() {
-       let ac = this.posNode.children.filter((v) => {
-            return v.opacity == 255
-        })
-        // console.log(ac);
-        if (ac.length !=
-            (PIPE_LEVEL_PIPE_DATA[this.level][0] + PIPE_LEVEL_PIPE_DATA[this.level][1])) {
-            console.log('管子还没下完');
-            return false;
-        }
-
-        this.show = this.posNode.children.filter((v) => {
-            return v.opacity == 255
-        })
-
-        // console.log(show);
-
-        if (this.show.find((v) => {
-            return v.y == this.posNode.children[0].y
-        }) == undefined) {
-            console.log('管子没头');
-            return false;
-        }
-
-        if (this.show.find((v) => {
-            return v.y == this.posNode.children[this.posNode.childrenCount - 1].y
-        }) == undefined) {
-            console.log('管子没尾');
-            return false;
-        }
-
-        // if(this.show[0].getComponent(PipeItem).type == 1 && (this.show[0].angle%360 == 90 || this.show[0].angle%360 == 270)){
-        //     console.log('直管口没朝上')
-        //     console.log(this.show[0].angle%360)
-        //     return false;
-        // }
-
-        // if(this.show[0].getComponent(PipeItem).type == 2 && (this.show[0].angle%360 == 270 || this.show[0].angle%360 == 180)){
-        //     console.log('弯管口没朝上')
-        //     return false;
-        // }
-
-        // if(this.show[(PIPE_LEVEL_PIPE_DATA[this.level][0] + PIPE_LEVEL_PIPE_DATA[this.level][1])-1].getComponent(PipeItem).type == 1 &&
-        //     (this.show[(PIPE_LEVEL_PIPE_DATA[this.level][0] + PIPE_LEVEL_PIPE_DATA[this.level][1])-1].angle%360 == 90 ||
-        //         this.show[(PIPE_LEVEL_PIPE_DATA[this.level][0] + PIPE_LEVEL_PIPE_DATA[this.level][1])-1].angle%360 == 270)){
-        //     console.log('直管口没朝下')
-        //     return false;
-        // }
-        //
-        // if(this.show[(PIPE_LEVEL_PIPE_DATA[this.level][0] + PIPE_LEVEL_PIPE_DATA[this.level][1])-1].getComponent(PipeItem).type == 2 &&
-        //     (this.show[(PIPE_LEVEL_PIPE_DATA[this.level][0] + PIPE_LEVEL_PIPE_DATA[this.level][1])-1].angle%360 == 0 ||
-        //         this.show[(PIPE_LEVEL_PIPE_DATA[this.level][0] + PIPE_LEVEL_PIPE_DATA[this.level][1])-1].angle%360 == 90)){
-        //     console.log('弯管口没朝下')
-        //     return false;
-        // }
-
-        let ss = [];
-        for(let i = 0;i < this.show.length;i++){
-            ss.push(this.show[i]);
-        }
-        let res = []
-        for(let i = 0;i < ss.length;i++){
-            // this.ccc(show,i)
-            let c = this.ccc(ss,i);
-            if(!c){
-                let o = this.outPos.find((v)=>{return  v.x == ss[i].x && v.y == ss[i].y})
-                if(o == undefined){
-                    console.log('最后一个管道位置不对')
+    //检查是否成功
+    checkResult(){
+        for(let i = 0; i < this.map.childrenCount;i++){
+            console.log(i);
+            if(this.map.children[i].children[0].active){
+                console.log(this.map.children[i].children[0].angle%180);
+                console.log(PIPE_LEVEL_DATA_TARGET[this.level][i][1]);
+                if(this.map.children[i].children[0].angle%180 != PIPE_LEVEL_DATA_TARGET[this.level][i][1]){
                     return false
                 }
-                console.log(i);
-                console.log(ss[i]);
-                // ss[i].color = new cc.Color(125,125,125,255);
-                if(ss[i].y == -PIPE_GRID_H/2){
-                    if(ss[i].getComponent(PipeItem).type == 1  && (ss[i].angle%360 == 90 || ss[i].angle%360 == 270)){
-                        console.log('直管口没朝上')
-                        return false;
-                    }
-                    if(ss[i].getComponent(PipeItem).type == 2 && (ss[i].angle%360 == 270 || ss[i].angle%360 == 180)){
-                        console.log('弯管口没朝上')
-                        return false;
-                    }
-                }else if(ss[i].y == this.posNode.children[this.posNode.childrenCount-1].y){
-                    if(ss[i].getComponent(PipeItem).type == 1 &&
-                        (ss[i].angle%360 == 90 ||
-                            ss[i].angle%360 == 270)){
-                        console.log('直管口没朝下')
-                        return false;
-                    }
-
-                    if(ss[i].getComponent(PipeItem).type == 2 &&
-                        (ss[i].angle%360 == 0 ||
-                            ss[i].angle%360 == 90)){
-                        console.log('弯管口没朝下')
-                        return false;
-                    }
+            }
+            if(this.map.children[i].children[1].active){
+                console.log(this.map.children[i].children[1].angle%360);
+                console.log(PIPE_LEVEL_DATA_TARGET[this.level][i][1]);
+                if(this.map.children[i].children[1].angle%360 != PIPE_LEVEL_DATA_TARGET[this.level][i][1]){
+                    return false
                 }
             }
-            // ss[i].color = new cc.Color(255,255,255,255);
-
-            res.push(c)
-            // console.log(this.ccc(ss,i),i);
-            // console.log(this.show);
         }
-        // console.log(res);
-        let r = res.filter((v)=>{return v == false})
-        if(r.length == 1){              // todo  胜利出口
-            console.log('胜利');
-            this.offDrag();
-            for(let i = 0; i <ss.length;i++ ){
-                cc.tween(ss[i])
-                .to(0.2,{opacity:1})
-                .to(0.2,{opacity:255})
-                .to(0.2,{opacity:1})
-                .to(0.2,{opacity:255})
-                .call(()=>{
-                    // this.showResult();
-                })
-                .start();
-            }
-            setTimeout(() => {
-                this.showResult();
-            }, 800);
-            
-            
-        }
-
-    }
-
-    showResult(){
+        console.log('成功');
+        //   todo 成功出口 需要更改什么的在这更改
         this.resultLogic.node.active = true;
-        // this.resultLogic.node.scale = 0;
-        // cc.tween(this.resultLogic.node)
-        // .to(0.5,{scale:1})
-        // .start();
-        this.resultLogic.showWin(this.level,this.time < 40 ? 3 :this.time < 50 ? 2 : 1);
+        this.resultLogic.showWin(this.level,this.time < 40 ? 3 :this.time < 80 ? 2 : 1);
         this.unscheduleAllCallbacks();
+        return;
     }
 
-    /**
-     * 根据角度去寻找下一个管道的位置，找不到返回 false 找到对应位置有管道后根据其角度返回TRUE 或 false
-     * @param show   所有管道的节点数组
-     * @param i      第几个  其实可以写成一个，但初始写了，后面懒得改，就没改
-     */
-    ccc(show,i){
-        if(show[i].angle%360 == 0){
-            if(show[i].getComponent(PipeItem).type == 1){
-                let a = this.show.findIndex((v)=>{return  v.x == show[i].x && v.y+PIPE_GRID_H == show[i].y})
-                if(a != -1){
-                    if(this.show[a].getComponent(PipeItem).type == 1){
-                        if(this.show[a].angle%360 == 0 || this.show[a].angle%360 == 180){
-                            this.show.splice(a,1);
-                            return true;
-                        }else {
-                            return false;
-                        }
-                    }else if(this.show[a].getComponent(PipeItem).type == 2){
-                        if(this.show[a].angle%360 == 0 || this.show[a].angle%360 == 90){
-                            this.show.splice(a,1);
 
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }
-                }else {
-                    return false;
-                }
-            }else if(show[i].getComponent(PipeItem).type == 2){
-                let a = this.show.findIndex((v)=>{return  v.x - PIPE_GRID_W == show[i].x && v.y == show[i].y})
-
-                if(a != -1){
-                    if(this.show[a].getComponent(PipeItem).type == 1){
-                        if(this.show[a].angle%360 == 90 || this.show[a].angle%360 == 270){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }else if(this.show[a].getComponent(PipeItem).type == 2){
-                        if(this.show[a].angle%360 == 90 || this.show[a].angle%360 == 180){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }
-                }else {
-                    return false;
-                }
-            }
-
-        }else if(show[i].angle%360 == 90){
-            if(show[i].getComponent(PipeItem).type == 1){
-                let a = this.show.findIndex((v)=>{return   (v.x-PIPE_GRID_W == show[i].x && v.y == show[i].y)
-                    ||(v.x+PIPE_GRID_W == show[i].x && v.y == show[i].y)})
-
-                if(a != -1){
-                    if(this.show[a].getComponent(PipeItem).type == 1){
-                        if(this.show[a].angle%360 == 90 || this.show[a].angle%360 == 270){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }else if(this.show[a].getComponent(PipeItem).type == 2){
-                        if(this.show[a].angle%360 == 90 || this.show[a].angle%360 == 180){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }
-                }else {
-                    return false;
-                }
-            }else if(show[i].getComponent(PipeItem).type == 2){
-                let a = this.show.findIndex((v)=>{return   v.x+PIPE_GRID_W == show[i].x && v.y == show[i].y})
-
-                if(a != -1){
-                    if(this.show[a].getComponent(PipeItem).type == 1){
-                        if(this.show[a].angle%360 == 90 || this.show[a].angle%360 == 270){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }else if(this.show[a].getComponent(PipeItem).type == 2){
-                        if(this.show[a].angle%360 == 0 || this.show[a].angle%360 == 270){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }
-                }else {
-                    return false;
-                }
-            }
-        } else if(show[i].angle%360 == 180){
-            if(show[i].getComponent(PipeItem).type == 1){
-                let a = this.show.findIndex((v)=>{return  v.x == show[i].x && v.y+PIPE_GRID_H == show[i].y})
-
-                if(a != -1){
-                    if(this.show[a].getComponent(PipeItem).type == 1){
-                        if(this.show[a].angle%360 == 0 || this.show[a].angle%360 == 180){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }else if(this.show[a].getComponent(PipeItem).type == 2){
-                        if(this.show[a].angle%360 == 0 || this.show[a].angle%360 == 90){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }
-                }else {
-                    return false;
-                }
-            }else if(show[i].getComponent(PipeItem).type == 2){
-                let a = this.show.findIndex((v)=>{return  v.x == show[i].x && v.y+PIPE_GRID_H == show[i].y})
-
-                if(a != -1){
-                    if(this.show[a].getComponent(PipeItem).type == 1){
-                        if(this.show[a].angle%360 == 0 || this.show[a].angle%360 == 180){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }else if(this.show[a].getComponent(PipeItem).type == 2){
-                        if(this.show[a].angle%360 == 90 || this.show[a].angle%360 == 0){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }
-                }else {
-                    return false;
-                }
-            }
-        } else if(show[i].angle%360 == 270){
-            if(show[i].getComponent(PipeItem).type == 1){
-                let a = this.show.findIndex((v)=>{return (v.x-PIPE_GRID_W == show[i].x && v.y == show[i].y)
-                    ||(v.x+PIPE_GRID_W == show[i].x && v.y == show[i].y)})
-
-                if(a != -1){
-                    if(this.show[a].getComponent(PipeItem).type == 1){
-                        if(this.show[a].angle%360 == 90 || this.show[a].angle%360 == 270){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }else if(this.show[a].getComponent(PipeItem).type == 2){
-                        if(this.show[a].angle%360 == 90 || this.show[a].angle%360 == 180){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }
-                }else {
-                    return false;
-                }
-            }else if(show[i].getComponent(PipeItem).type == 2){
-                let a = this.show.findIndex((v)=>{return v.x == show[i].x && v.y+PIPE_GRID_H == show[i].y})
-                if(a != -1){
-                    if(this.show[a].getComponent(PipeItem).type == 1){
-                        if(this.show[a].angle%360 == 0 || this.show[a].angle%360 == 180){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }else if(this.show[a].getComponent(PipeItem).type == 2){
-                        if(this.show[a].angle%360 == 90 || this.show[a].angle%360 == 0){
-                            this.show.splice(a,1);
-
-                            return true;
-
-                        }else {
-                            return false;
-                        }
-                    }
-                }else {
-                    return false;
-                }
-            }
-        }
-    }
 
 
 }
+
+export function backNumber(p){
+    let a = p%360;
+    switch (a){
+        case 0:
+            return 0;
+        case 90:
+            return 1;
+
+        case 180:
+            return 2;
+
+        case 270:
+            return 3;
+
+    }
+}
+
 
 
 export class NodeBorder {

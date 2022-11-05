@@ -27,6 +27,7 @@ export default class NewClass extends cc.Component {
     /**返回点击点击*/
     private backBtnClick(){
         UIManager.closeUI(this.node.name);
+        AudioMgr.playAudioEffect(audioConfig.WordClick);
     }
 
     /**音乐点击*/

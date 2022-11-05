@@ -1,4 +1,5 @@
-import { GameMassage, letNodeConfig, levelNodeConfig } from "../config/Config";
+import { audioConfig, GameMassage, letNodeConfig, levelNodeConfig } from "../config/Config";
+import { AudioMgr } from "../framework/AudioMgr";
 import { E_GameData_Type, GameDataMgr } from "../framework/GameDataMgr";
 import { NetWork } from "../framework/NetWork";
 import { Observer } from "../framework/Observer";
@@ -119,7 +120,7 @@ export default class UI_Level extends cc.Component {
     private levNum:number = 0;
     private templvBool:boolean = false;
     private levelBtnClick(event){
-        
+        AudioMgr.playAudioEffect(audioConfig.WordClick);
         if(!this.templvBool){
             this.templvBool = true
             let self = this;
@@ -138,7 +139,7 @@ export default class UI_Level extends cc.Component {
             // }
             setTimeout(() => {
                 this.templvBool = false;
-            }, 800);
+            }, 1000);
         }
         
         
