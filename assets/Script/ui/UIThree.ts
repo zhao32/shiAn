@@ -37,6 +37,19 @@ export default class NewClass extends cc.Component {
     @property(cc.Node)
     prefetTip: cc.Node = null
 
+    @property({
+        type: cc.SpriteFrame,
+        tooltip: "亮条",
+    })
+    private tiaoFrameBright: cc.SpriteFrame;
+
+
+    @property({
+        type: cc.SpriteFrame,
+        tooltip: "暗条",
+    })
+    private tiaoFrameDark: cc.SpriteFrame;
+
     startTime: number
 
     dis: number = 0
@@ -361,9 +374,14 @@ export default class NewClass extends cc.Component {
     onBtnClick(event, idx) {
         console.log("customEventData:" + idx)
 
-        this.tiao.children[idx].active = false
+        // this.tiao.children[idx].active = false
+        this.tiao.children[idx].opacity= 255
+        this.tiao.children[idx].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameBright
+
         setTimeout(() => {
-            this.tiao.children[idx].active = true
+            // this.tiao.children[idx].active = true
+            this.tiao.children[idx].opacity= 180
+            this.tiao.children[idx].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameDark
         }, 200);
 
         let shine = event.target.getChildByName('guang') as cc.Node
@@ -381,6 +399,7 @@ export default class NewClass extends cc.Component {
                     fall.opacity = 0;
                     fall.name = "destory";
                     this.prefetTip.active = true;
+                    this.prefetTip.getComponent(cc.Animation).play()
                     setTimeout(() => {
                         this.prefetTip.active = false;
                     }, 600);
@@ -393,6 +412,7 @@ export default class NewClass extends cc.Component {
                     fall.opacity = 0;
                     fall.name = "destory";
                     this.goodTip.active = true;
+                    this.goodTip.getComponent(cc.Animation).play()
                     setTimeout(() => {
                         this.goodTip.active = false;
                     }, 600);
@@ -489,6 +509,7 @@ export default class NewClass extends cc.Component {
                 fall.name = 'destory'
                 this.missNum++
                 this.missTip.active = true;
+                this.missTip.getComponent(cc.Animation).play()
                 setTimeout(() => {
                     this.missTip.active = false;
                     if (this.missNum == 3) {

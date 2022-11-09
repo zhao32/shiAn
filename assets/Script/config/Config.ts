@@ -126,4 +126,7 @@ export const audioConfig = {
     clickRight:"audio/right",
 
     clickFalse:"audio/false",
+
+    fanpai:"audio/fanpai",
+
 }

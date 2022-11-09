@@ -14,6 +14,12 @@ const {ccclass, property} = cc._decorator;
 export default class UI_GameFour extends cc.Component {
 
     public static Instance: UI_GameFour = null;
+
+    @property({
+        type: cc.Node,
+        tooltip: "提示Node",
+    })
+    private tipNode: cc.Node
     
     @property({
         type: cc.Node,
@@ -32,6 +38,18 @@ export default class UI_GameFour extends cc.Component {
         tooltip: "等级Node",
     })
     private levelNode: cc.Label = null;
+
+    @property({
+        type: cc.Label,
+        tooltip: "等级Node",
+    })
+    private rightLabel: cc.Label = null;
+
+    @property({
+        type: cc.Label,
+        tooltip: "等级Node",
+    })
+    private falseLabel: cc.Label = null;
 
     @property({
         type: cc.Node,
@@ -63,6 +81,8 @@ export default class UI_GameFour extends cc.Component {
     private idArr=[];
 
     private pBool:boolean = false;
+
+    rightNum:number = 0
 
     onLoad(){
         UI_GameFour.Instance = this;
@@ -119,6 +139,9 @@ export default class UI_GameFour extends cc.Component {
         this.idArr=[]
         this.runingArr = [];
         GameMassage.num = 0;
+        this.rightNum = 0
+        this.rightLabel.string = '0'
+        this.falseLabel.string = '0'
         this.scoreNum = 0;
         this.pBool = false;
         this.romdomNum = GameMassage.fourNum;
@@ -135,16 +158,23 @@ export default class UI_GameFour extends cc.Component {
         let lv = cpLev +1;
         this.levelNode.string = "level" + lv;
 
-        
+        this.tipNode.active = true
+        this.scheduleOnce(()=>{
+            this.tipNode.active = false
+        },5)
+
+        this.scheduleOnce(()=>{
+        },3)
+        this.schedule(this.downFunc,1);
+
 
         for (let a = 0; a < this.showNode.length; a++) {
             this.showNode[a].active = true;
             this.showNode[a].opacity = 255;
             this.showNode[a].x= -300 + Math.floor(Math.random()*(700-this.showNode[a].width));
-            this.showNode[a].y = 996;
+            this.showNode[a].y =500 +  996;
         }
 
-        this.schedule(this.downFunc,1);
     }
 
     private rodomArr(num:number){
@@ -192,6 +222,8 @@ export default class UI_GameFour extends cc.Component {
         setTimeout(() => {
             this.dcNode[0].active = false;
         }, 800);
+        this.rightNum++
+        this.rightLabel.string = String(this.rightNum)
     }
 
     //错误
@@ -362,6 +394,8 @@ export default class UI_GameFour extends cc.Component {
                     }
                 }
             }
+            this.falseLabel.string = GameMassage.num.toString()
+
         })
         .start()
     }
@@ -397,6 +431,6 @@ export default class UI_GameFour extends cc.Component {
 
     //x,y,z方向的重力感应加速度
     onDeviceMotionEvent(event) {
-        cc.log("event name:", event.type, " acc x:", event.acc.x, " acc y:", event.acc.y, " acc z:", event.acc.z); //单位是g=9.8m/s^2
+        // cc.log("event name:", event.type, " acc x:", event.acc.x, " acc y:", event.acc.y, " acc z:", event.acc.z); //单位是g=9.8m/s^2
     }
 }

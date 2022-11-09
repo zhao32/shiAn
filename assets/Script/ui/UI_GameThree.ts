@@ -50,6 +50,20 @@ export default class UI_GameThree extends cc.Component {
     })
     private tiNode: cc.Node[] = [];
 
+
+    @property({
+        type: cc.SpriteFrame,
+        tooltip: "亮条",
+    })
+    private tiaoFrameBright: cc.SpriteFrame;
+
+
+    @property({
+        type: cc.SpriteFrame,
+        tooltip: "暗条",
+    })
+    private tiaoFrameDark: cc.SpriteFrame;
+
     private mcArr = [1,2,3,4,5,6,7,8,9,10,11,12];
 
     private runArr = [];
@@ -167,9 +181,15 @@ export default class UI_GameThree extends cc.Component {
 
     /**按钮点击1 */
     private oneBtnClick(){
-        this.tiaoNode[0].active =false
+        // this.tiaoNode[0].active =false
+        console.log('---------------------------------')
+        this.tiaoNode[0].opacity = 255
+        this.tiaoNode[0].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameBright
         setTimeout(() => {
-            this.tiaoNode[0].active =true
+            // this.tiaoNode[0].active =true
+            this.tiaoNode[0].opacity = 180
+            this.tiaoNode[0].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameDark
+
         }, 200);
          if((this.showNode[0].y<=-509 && this.showNode[0].y>=-630)){
             this.ssNodeShow(this.showNode[0])
@@ -203,9 +223,14 @@ export default class UI_GameThree extends cc.Component {
 
     /**按钮点击2 */
     private twoBtnClick(){
-        this.tiaoNode[1].active =false
+        // this.tiaoNode[1].active =false
+        this.tiaoNode[1].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameBright
+        this.tiaoNode[1].opacity = 255
+
         setTimeout(() => {
-            this.tiaoNode[1].active =true
+            // this.tiaoNode[1].active =true
+            this.tiaoNode[1].opacity = 180
+            this.tiaoNode[1].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameDark
         }, 200);
         if((this.showNode[1].y<=-509 && this.showNode[1].y>=-630) ){
             this.ssNodeShow(this.showNode[1])
@@ -239,9 +264,13 @@ export default class UI_GameThree extends cc.Component {
 
     /**按钮点击3 */
     private threeBtnClick(){
-        this.tiaoNode[2].active =false
+        // this.tiaoNode[2].active =false
+        this.tiaoNode[2].opacity = 255
+        this.tiaoNode[2].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameBright
         setTimeout(() => {
-            this.tiaoNode[2].active =true
+            // this.tiaoNode[2].active =true
+            this.tiaoNode[3].opacity = 180
+            this.tiaoNode[2].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameDark
         }, 200);
         if((this.showNode[2].y<=-509 && this.showNode[2].y>=-630) ){
             this.ssNodeShow(this.showNode[2])
@@ -275,9 +304,13 @@ export default class UI_GameThree extends cc.Component {
 
     /**按钮点击4 */
     private fourBtnClick(){
-        this.tiaoNode[3].active =false
+        // this.tiaoNode[3].active =false
+        this.tiaoNode[3].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameBright
+        this.tiaoNode[3].opacity = 255
         setTimeout(() => {
-            this.tiaoNode[3].active =true
+            // this.tiaoNode[3].active =true
+            this.tiaoNode[3].opacity = 180
+            this.tiaoNode[3].getComponent(cc.Sprite).spriteFrame = this.tiaoFrameDark
         }, 200);
         if((this.showNode[3].y<=-509 && this.showNode[3].y>=-630)){
             this.ssNodeShow(this.showNode[3])

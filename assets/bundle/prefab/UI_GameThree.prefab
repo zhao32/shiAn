@@ -811,7 +811,7 @@
     "_prefab": {
       "__id__": 20
     },
-    "_opacity": 255,
+    "_opacity": 180,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -918,7 +918,7 @@
     "_prefab": {
       "__id__": 23
     },
-    "_opacity": 255,
+    "_opacity": 180,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -1025,7 +1025,7 @@
     "_prefab": {
       "__id__": 26
     },
-    "_opacity": 255,
+    "_opacity": 180,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -1132,7 +1132,7 @@
     "_prefab": {
       "__id__": 29
     },
-    "_opacity": 255,
+    "_opacity": 180,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -4482,6 +4482,12 @@
         "__id__": 111
       }
     ],
+    "tiaoFrameBright": {
+      "__uuid__": "6ec52208-d36c-4c93-8484-aa453043ff07"
+    },
+    "tiaoFrameDark": {
+      "__uuid__": "96ddcceb-d5b6-4821-ae4f-7fd1a9dc73ed"
+    },
     "_id": ""
   },
   {
