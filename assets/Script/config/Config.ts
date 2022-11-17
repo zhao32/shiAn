@@ -10,7 +10,7 @@ export const CurPlatform = GamePlatform.Local;
 /**接口地址 */
 export const ApiUrl = {
     // appUrl: "http://qmapp.vip.hnhxzkj.com,//测试地址
-    appUrl: "http://qmapp.vip.hnhxzkj.com",//正式地址
+    appUrl: "https://qmapp.vip.hnhxzkj.com",//正式地址
 };
 
 /**关卡配置表 */
