@@ -97,6 +97,7 @@ export let GameMassage = {
     add:"",
     isLevel:false,
     fourNum : 1,
+    musicBool:true
 }
 
 /**Node */

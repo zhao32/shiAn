@@ -83,6 +83,13 @@ export default class UI_Level extends cc.Component {
                 // })
                 // this.content.getChildByName(clB).on(cc.Node.EventType.TOUCH_START,this.levelBtnClick,this)
             }
+
+            // let scaleDownAction = cc.scaleTo(0.1, 1.05 );
+            // let scaleUpnAction = cc.scaleTo(0.1, 1 );
+
+            // this.content.getChildByName(clB).stopAllActions();
+            // // AudioManager.instance.playSound(EnumManager.AudioPath.click, false, 1)
+            // this.content.getChildByName(clB).runAction(cc.sequence(scaleDownAction,scaleUpnAction));
             this.content.getChildByName(clB).on(cc.Node.EventType.TOUCH_START,this.levelBtnClick,this)
         }
 
@@ -113,6 +120,7 @@ export default class UI_Level extends cc.Component {
 
     //返回按钮点击
     backBtnClick(){
+        AudioMgr.playAudioEffect(audioConfig.WordClick);
         UIManager.closeUI("UI_Level");
     }
 
@@ -171,6 +179,7 @@ export default class UI_Level extends cc.Component {
 
     /**开始游戏点击*/
     private startGameBtnClick(){
+        AudioMgr.playAudioEffect(audioConfig.WordClick);
         let levNum = Number(GameDataMgr.getDataByType(E_GameData_Type.MaxlevelNum));
         GameDataMgr.setDataByType(E_GameData_Type.ClickPassLv, levNum);
         this.levelPageShow(levNum)
@@ -179,6 +188,7 @@ export default class UI_Level extends cc.Component {
 
     /**个人中心点击*/
     private PlayCentreBtnClick(){
+        AudioMgr.playAudioEffect(audioConfig.WordClick);
         if(this.contreNode.active){
             this.contreNode.scale = 1;
             cc.tween(this.contreNode)
@@ -203,11 +213,13 @@ export default class UI_Level extends cc.Component {
 
     /**个人资料点击*/
     private playMassageGameBtnClick(){
+        AudioMgr.playAudioEffect(audioConfig.WordClick);
         UIManager.openUI("UI_PlayMissage");
     }
     
     /**排行点击*/
     private rankBtnClick(){
+        AudioMgr.playAudioEffect(audioConfig.WordClick);
         NetWork.getRankMessage((res)=>{
             if(res){
                 UIManager.openUI("UI_Rank");
@@ -218,6 +230,7 @@ export default class UI_Level extends cc.Component {
 
     /**积分兑换点击*/
     private scoreBtnClick(){
+        AudioMgr.playAudioEffect(audioConfig.WordClick);
         NetWork.getScoreMessage((res)=>{
             if(res){
                 NetWork.getGoodsMessage((res)=>{

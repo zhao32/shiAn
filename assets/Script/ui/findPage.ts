@@ -1,4 +1,4 @@
-import { audioConfig } from "../config/Config";
+import { audioConfig, GameMassage } from "../config/Config";
 import { AudioMgr } from "../framework/AudioMgr";
 import { E_GameData_Type, GameDataMgr } from "../framework/GameDataMgr";
 import { Observer } from "../framework/Observer";
@@ -15,6 +15,8 @@ export default class NewClass extends cc.Component {
 
     @property(cc.Label)
     timeDisplay: cc.Label = null;
+
+    @property(cc.Sprite) timeImg:cc.Sprite = null;  //时间进度条
 
     @property(cc.Prefab)
     tagErr: cc.Prefab = null;
@@ -38,12 +40,15 @@ export default class NewClass extends cc.Component {
 
     timeHanlder: Function
 
-    time: number = 60
+    time: number = 0
 
     canClick: boolean = true
 
     /**点错的次数 */
     falseTime: number = 0
+
+    maxTime:number = 60;
+
 
     // LIFE-CYCLE CALLBACKS:
 
@@ -55,15 +60,15 @@ export default class NewClass extends cc.Component {
         this.grid0.on(cc.Node.EventType.TOUCH_START, this.touchGrid, this)
         this.grid1.on(cc.Node.EventType.TOUCH_START, this.touchGrid, this)
 
-        this.timeHanlder = () => {
-            this.time--
-            // this.timeDisplay.string = `time:${this.time}`
-            this.timeDisplay.string = `${this.time}`
-            if (this.time <= 0) {
-                this.unschedule(this.timeHanlder)
-                this.gameLose()
-            }
-        }
+        // this.timeHanlder = () => {
+        //     this.time--
+        //     // this.timeDisplay.string = `time:${this.time}`
+        //     this.timeDisplay.string = `${this.time}`
+        //     if (this.time <= 0) {
+        //         this.unschedule(this.timeHanlder)
+        //         this.gameLose()
+        //     }
+        // }
     }
 
     touchGrid(eventTouch) {
@@ -130,7 +135,30 @@ export default class NewClass extends cc.Component {
 
     }
 
+      /**
+     * 关卡内计时
+     */
+       addTime(){
+        console.log('this.time:'+this.time )
+        console.log('this.maxTime:'+this.maxTime )
+
+        if(this.time >= this.maxTime){
+            //游戏结束                  todo   失败出口
+            this.gameLose()
+            this.unscheduleAllCallbacks();
+            return;
+        }
+        this.time+=0.1;
+        // this.timeLabel.string = `${this.maxTime -this.time}`;
+        this.timeImg.fillRange = Math.max(0,Math.min(1,(this.maxTime - this.time)/this.maxTime)) ;
+    }
+
+
     gameStart() {
+        this.time = 0
+        this.timeImg.fillRange = 1;
+        this.schedule(this.addTime,0.1,cc.macro.REPEAT_FOREVER,1);
+
         for (let i = 1; i < this.grid0.children.length; i++) {
             this.grid0.children[i].active = false
             this.grid1.children[i].active = false
@@ -142,10 +170,10 @@ export default class NewClass extends cc.Component {
         sprite.spriteFrame = null
 
         this.levelDisplay.string = `Level ${GameUtil.CURLEVEL + 11}`
-        this.time = 60
+        // this.time = 60
         // this.timeDisplay.string = `time:${this.time}`
         this.timeDisplay.string = `${this.time}`
-        this.schedule(this.timeHanlder, 1)
+        // this.schedule(this.timeHanlder, 1)
 
         this.canClick = true
 
@@ -209,16 +237,15 @@ export default class NewClass extends cc.Component {
     }
 
     /**音乐点击*/
-    private musicBool: boolean = true;
     private soundBtnClick() {
         AudioMgr.playAudioEffect(audioConfig.WordClick);
-        if (this.musicBool) {
-            this.musicBool = false;
+        if (GameMassage.musicBool) {
+            GameMassage.musicBool = false;
             // this.musicCloseBg.active = true;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, false);
             AudioMgr.pauseBGMusic();
         } else {
-            this.musicBool = true;
+            GameMassage.musicBool = true;
             // this.musicCloseBg.active = false;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, true);
             AudioMgr.playBGMusic(audioConfig.M_BGMusic);

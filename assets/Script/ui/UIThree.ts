@@ -5,7 +5,7 @@
 // Learn life-cycle callbacks:
 //  - https://docs.cocos.com/creator/manual/en/scripting/life-cycle-callbacks.html
 
-import { audioConfig } from "../config/Config";
+import { audioConfig, GameMassage } from "../config/Config";
 import { AudioMgr } from "../framework/AudioMgr";
 import { E_GameData_Type, GameDataMgr } from "../framework/GameDataMgr";
 import { NetWork } from "../framework/NetWork";
@@ -84,6 +84,7 @@ export default class NewClass extends cc.Component {
     private yyTimeShow(num:number){
         GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, false);
         AudioMgr.pauseBGMusic();
+        cc.audioEngine.stopAllEffects()
         cc.audioEngine.playEffect(this.music[num-1], false)
         if(num == 1){
             this.points = [
@@ -351,6 +352,7 @@ export default class NewClass extends cc.Component {
     }
 
     init() {
+        console.log('----------------------')
         let aNum = Math.floor(Math.random()*3)+1;
         this.tempNum = aNum;
         console.log(this.tempNum);
@@ -539,16 +541,16 @@ export default class NewClass extends cc.Component {
     }
 
     /**音乐点击*/
-    private musicBool: boolean = true;
+    // private musicBool: boolean = true;
     private soundBtnClick() {
         AudioMgr.playAudioEffect(audioConfig.WordClick);
-        if (this.musicBool) {
-            this.musicBool = false;
+        if (GameMassage.musicBool) {
+            GameMassage.musicBool = false;
             // this.musicCloseBg.active = true;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, false);
             AudioMgr.pauseBGMusic();
         } else {
-            this.musicBool = true;
+            GameMassage.musicBool = true;
             // this.musicCloseBg.active = false;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, true);
             AudioMgr.playBGMusic(audioConfig.M_BGMusic);

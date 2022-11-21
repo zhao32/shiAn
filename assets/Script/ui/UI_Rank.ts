@@ -1,4 +1,4 @@
-import { audioConfig, RankConfig } from "../config/Config";
+import { audioConfig, GameMassage, RankConfig } from "../config/Config";
 import { AudioMgr } from "../framework/AudioMgr";
 import { E_GameData_Type, GameDataMgr } from "../framework/GameDataMgr";
 import { UIManager } from "../framework/UIManager";
@@ -58,16 +58,16 @@ export default class UI_Rank extends cc.Component {
     }
 
     /**音乐点击*/
-    private musicBool:boolean = true;
+    // private musicBool:boolean = true;
     private soundBtnClick(){
         AudioMgr.playAudioEffect(audioConfig.WordClick);
-        if(this.musicBool){
-            this.musicBool = false;
+        if(GameMassage.musicBool){
+            GameMassage.musicBool = false;
             // this.musicCloseBg.active = true;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, false);
             AudioMgr.pauseBGMusic();
         }else{
-            this.musicBool = true;
+            GameMassage.musicBool = true;
             // this.musicCloseBg.active = false;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, true);
             AudioMgr.playBGMusic(audioConfig.M_BGMusic);

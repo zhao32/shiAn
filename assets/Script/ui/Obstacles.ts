@@ -95,7 +95,7 @@ export default class Obstacles extends cc.Component {
             }
         }
         // other.node.y = 996;
-        other.node.opacity = 0;
+        // other.node.opacity = 0;
         
     }
 

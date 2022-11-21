@@ -463,8 +463,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 68,
-      "height": 68
+      "width": 80,
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -475,7 +475,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -297.164,
+        -300,
         547.425,
         0,
         0,
@@ -657,8 +657,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 68,
-      "height": 68
+      "width": 80,
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -669,7 +669,7 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -215.635,
+        -195,
         547.425,
         0,
         0,
@@ -1718,12 +1718,12 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": -150
     },
     "_size": {
       "__type__": "cc.Size",
       "width": 71,
-      "height": 300
+      "height": 200
     },
     "_id": ""
   },
@@ -1849,12 +1849,12 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": -150
     },
     "_size": {
       "__type__": "cc.Size",
       "width": 96,
-      "height": 244
+      "height": 200
     },
     "_id": ""
   },
@@ -2111,12 +2111,12 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": -150
     },
     "_size": {
       "__type__": "cc.Size",
       "width": 75,
-      "height": 285
+      "height": 200
     },
     "_id": ""
   },
@@ -2240,7 +2240,7 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": -150
     },
     "_size": {
       "__type__": "cc.Size",
@@ -2369,7 +2369,7 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": -150
     },
     "_size": {
       "__type__": "cc.Size",
@@ -2506,7 +2506,7 @@
     "_offset": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": 50
     },
     "_size": {
       "__type__": "cc.Size",

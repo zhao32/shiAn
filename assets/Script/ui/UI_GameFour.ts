@@ -164,15 +164,15 @@ export default class UI_GameFour extends cc.Component {
         },5)
 
         this.scheduleOnce(()=>{
+            this.schedule(this.downFunc,1);
         },3)
-        this.schedule(this.downFunc,1);
 
 
         for (let a = 0; a < this.showNode.length; a++) {
             this.showNode[a].active = true;
             this.showNode[a].opacity = 255;
             this.showNode[a].x= -300 + Math.floor(Math.random()*(700-this.showNode[a].width));
-            this.showNode[a].y =500 +  996;
+            this.showNode[a].y =  996;
         }
 
     }
@@ -218,20 +218,27 @@ export default class UI_GameFour extends cc.Component {
 
     //正确
     private zqShow(){
+        this.dcNode[0].x = this.basketNode.x 
+        this.dcNode[0].y = this.basketNode.y + 150
+
+        console.log('----------------')
         this.dcNode[0].active = true;
         setTimeout(() => {
             this.dcNode[0].active = false;
-        }, 800);
+        }, 1500);
         this.rightNum++
         this.rightLabel.string = String(this.rightNum)
     }
 
     //错误
     private cwShow(){
+        this.dcNode[1].x = this.basketNode.x 
+        this.dcNode[1].y = this.basketNode.y + 150
+
         this.dcNode[1].active = true;
         setTimeout(() => {
             this.dcNode[1].active = false;
-        }, 800);
+        }, 1500);
     }
 
     /**碰撞显示 */
@@ -316,7 +323,8 @@ export default class UI_GameFour extends cc.Component {
     /**下落 */
     private tweenDownFunc(aNode:cc.Node){
         cc.tween(aNode)
-        .to(8, {y: -630},{easing:"quartIn"})
+        .to(8, {y: -500},{easing:"quartIn"})
+        .delay(0.5)
         .call(() =>{
             aNode.opacity = 0;
             aNode.y = 996;
@@ -397,6 +405,9 @@ export default class UI_GameFour extends cc.Component {
             this.falseLabel.string = GameMassage.num.toString()
 
         })
+        .delay(1)
+        .call(()=>{})
+
         .start()
     }
 
@@ -413,16 +424,16 @@ export default class UI_GameFour extends cc.Component {
     }
 
     /**音乐点击*/
-    private musicBool:boolean = true;
+    // private musicBool:boolean = true;
     private soundBtnClick(){
         AudioMgr.playAudioEffect(audioConfig.WordClick);
-        if(this.musicBool){
-            this.musicBool = false;
+        if(GameMassage.musicBool){
+            GameMassage.musicBool = false;
             // this.musicCloseBg.active = true;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, false);
             AudioMgr.pauseBGMusic();
         }else{
-            this.musicBool = true;
+            GameMassage.musicBool = true;
             // this.musicCloseBg.active = false;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, true);
             AudioMgr.playBGMusic(audioConfig.M_BGMusic);

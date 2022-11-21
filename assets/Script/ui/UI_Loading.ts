@@ -34,6 +34,16 @@ export default class UI_Loading extends cc.Component {
 
     onLoad(){
         this.node.zIndex = 9;
+        cc.loader.loadResDir("pic", (err, assets, urls) => {
+            if (!err) {
+                // console.log(JSON.stringify(assets))
+                cc.log(`加载资源${err ? '失败' : '成功'}`)
+                console.log(JSON.stringify(urls))
+            } else {
+                console.error('err:' + err)
+            }
+        });
+
     }
 
     onEnable(){

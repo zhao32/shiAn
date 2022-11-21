@@ -1,4 +1,4 @@
-import { audioConfig, CurPlatform, GamePlatform, LevelConfig, showBool } from "../config/Config";
+import { audioConfig, CurPlatform, GameMassage, GamePlatform, LevelConfig, showBool } from "../config/Config";
 import { AudioMgr } from "../framework/AudioMgr";
 import { E_GameData_Type, GameDataMgr } from "../framework/GameDataMgr";
 import { NetWork } from "../framework/NetWork";
@@ -63,6 +63,8 @@ export default class UI_GameTwo extends cc.Component {
     })
     private tsArrNode: cc.SpriteFrame[] = [];
 
+    @property(cc.Sprite) timeImg:cc.Sprite = null;  //时间进度条
+
     private mcArr = [1, 1, 2, 2, 3, 3, 4, 4, 5];
 
     private frrArr = [];
@@ -79,6 +81,7 @@ export default class UI_GameTwo extends cc.Component {
 
     private clBoolArr = [false, false, false, false, false, false, false, false, false, false, false, false,]
 
+    maxTime
     onLoad() {
         UI_GameTwo.Instance = this;
         this.clickNum = 0;
@@ -101,6 +104,8 @@ export default class UI_GameTwo extends cc.Component {
 
     }
 
+    
+
     /**初始化 */
     init() {
         this.tsNode.active = false;
@@ -111,7 +116,7 @@ export default class UI_GameTwo extends cc.Component {
         this.alpv = cpLev - 20;
         // this.timeNumNum = 60 - ((alpv-1)*3)
         this.timeNumNum = 60 - ((this.alpv - 1) * 3)
-
+        this.maxTime = this.timeNumNum
         this.tghBool = false;
         this.duiNum = 0;
         this.clickNum = 0;
@@ -140,7 +145,7 @@ export default class UI_GameTwo extends cc.Component {
         }
 
         this.timeNode.string = this.timeNumNum + "";
-        this.schedule(this.timeFun, 1);
+        this.schedule(this.timeFun, 0.1);
     }
 
     private randomArr(arr) {
@@ -280,12 +285,20 @@ export default class UI_GameTwo extends cc.Component {
 
     /**时间监听 */
     private timeFun() {
-        this.timeNumNum--;
-        this.timeNode.string = this.timeNumNum + "";
-        if (this.timeNumNum <= 0) {
+        this.timeNumNum-=0.1;
+        // this.timeNode.string = this.timeNumNum + "";
+        // if (this.timeNumNum <= 0) {
+        //     this.unschedule(this.timeFun);
+        //     UIManager.openUI("UI_Lose");
+        // }
+
+        if(this.timeNumNum <= 0){
+            //游戏结束                  todo   失败出口
             this.unschedule(this.timeFun);
             UIManager.openUI("UI_Lose");
         }
+        // this.timeLabel.string = `${this.maxTime -this.time}`;
+        this.timeImg.fillRange =1- Math.max(0,Math.min(1,(this.maxTime - this.timeNumNum)/this.maxTime)) ;
     }
 
     /**翻牌胜利 */
@@ -357,16 +370,16 @@ export default class UI_GameTwo extends cc.Component {
     }
 
     /**音乐点击*/
-    private musicBool: boolean = true;
+    // private musicBool: boolean = true;
     private soundBtnClick() {
         AudioMgr.playAudioEffect(audioConfig.WordClick);
-        if (this.musicBool) {
-            this.musicBool = false;
+        if (GameMassage.musicBool) {
+            GameMassage.musicBool = false;
             // this.musicCloseBg.active = true;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, false);
             AudioMgr.pauseBGMusic();
         } else {
-            this.musicBool = true;
+            GameMassage.musicBool = true;
             // this.musicCloseBg.active = false;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, true);
             AudioMgr.playBGMusic(audioConfig.M_BGMusic);

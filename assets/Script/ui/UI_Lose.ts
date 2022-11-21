@@ -31,16 +31,16 @@ export default class UI_Win extends cc.Component {
         UIManager.openUI("UI_Level");
     }
 
-    private musicBool:boolean = true;
+    // private musicBool:boolean = true;
     private soundBtnClick(){
         AudioMgr.playAudioEffect(audioConfig.WordClick);
-        if(this.musicBool){
-            this.musicBool = false;
+        if(GameMassage.musicBool){
+            GameMassage.musicBool = false;
             // this.musicCloseBg.active = true;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, false);
             AudioMgr.pauseBGMusic();
         }else{
-            this.musicBool = true;
+            GameMassage.musicBool = true;
             // this.musicCloseBg.active = false;
             GameDataMgr.setDataByType(E_GameData_Type.IsHadAudio_BG, true);
             AudioMgr.playBGMusic(audioConfig.M_BGMusic);
