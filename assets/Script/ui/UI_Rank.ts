@@ -8,8 +8,6 @@ const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class UI_Rank extends cc.Component {
-
-
     // LIFE-CYCLE CALLBACKS:
     @property({
         type: cc.Node,
