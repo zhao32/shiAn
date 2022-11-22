@@ -77,20 +77,15 @@ export default class UI_Level extends cc.Component {
             let clB = "gqBtn" + (a+1);
             if(a<(levNum+1)){
                 let spr = this.content.getChildByName(clB).getComponent(cc.Sprite);
-                // let url = "ui_zi/gq" + (a+1);
-                // ResourcesMgr.loadSpriteFrame(url, (frame)=>{
+                let url = "ui_zi/gq" + (a+1);
+                ResourcesMgr.loadSpriteFrame(url, (frame)=>{
                     spr.spriteFrame = levelNodeConfig[a];
-                // })
+                })
                 // this.content.getChildByName(clB).on(cc.Node.EventType.TOUCH_START,this.levelBtnClick,this)
             }
 
-            // let scaleDownAction = cc.scaleTo(0.1, 1.05 );
-            // let scaleUpnAction = cc.scaleTo(0.1, 1 );
 
-            // this.content.getChildByName(clB).stopAllActions();
-            // // AudioManager.instance.playSound(EnumManager.AudioPath.click, false, 1)
-            // this.content.getChildByName(clB).runAction(cc.sequence(scaleDownAction,scaleUpnAction));
-            this.content.getChildByName(clB).on(cc.Node.EventType.TOUCH_START,this.levelBtnClick,this)
+            this.content.getChildByName(clB).on(cc.Node.EventType.TOUCH_END,this.levelBtnClick,this)
         }
 
         setTimeout(() => {
@@ -140,11 +135,11 @@ export default class UI_Level extends cc.Component {
             console.log("ID"+thId);
             let idNum = Number(thId-1);
             GameDataMgr.setDataByType(E_GameData_Type.ClickPassLv, idNum);
-            // if(idNum<=self.levNum){
+            if(idNum<=self.levNum){
                 this.levelPageShow(idNum)
-            // }else{
-            //     UI_Tip.Instance.showTip("当前关卡未解锁");
-            // }
+            }else{
+                UI_Tip.Instance.showTip("当前关卡未解锁");
+            }
             setTimeout(() => {
                 this.templvBool = false;
             }, 1000);
@@ -156,7 +151,7 @@ export default class UI_Level extends cc.Component {
     //关卡界面显示
     private levelPageShow(num){
         console.log(num);
-        if(num == 31){
+        if(num >= 31){
             UIManager.openUI("UI_GameThree1");
         }else if(num == 30 ){
             let typeNum = Math.floor(Math.random()*5)+1;
@@ -180,7 +175,7 @@ export default class UI_Level extends cc.Component {
     /**开始游戏点击*/
     private startGameBtnClick(){
         AudioMgr.playAudioEffect(audioConfig.WordClick);
-        let levNum = Number(GameDataMgr.getDataByType(E_GameData_Type.MaxlevelNum));
+        let levNum = Number(GameDataMgr.getDataByType(E_GameData_Type.MaxlevelNum)) ;
         GameDataMgr.setDataByType(E_GameData_Type.ClickPassLv, levNum);
         this.levelPageShow(levNum)
         console.log("关卡" + levNum);

@@ -336,8 +336,10 @@ export default class UI_GameTwo extends cc.Component {
     private scoreShow(star: number) {
         let le = GameDataMgr.getDataByType(E_GameData_Type.MaxlevelNum);
         let lv = GameDataMgr.getDataByType(E_GameData_Type.ClickPassLv);
+        console.log('----------------')
         console.log("加星星：" + le);
         console.log("加星星：" + lv);
+        // le = le + 1
         if (lv <= le) {
             GameDataMgr.addDataByType(E_GameData_Type.ClickPassLv, 1, 31);
             let lv = GameDataMgr.getDataByType(E_GameData_Type.ClickPassLv);

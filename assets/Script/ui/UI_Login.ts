@@ -56,6 +56,21 @@ export default class UI_Main extends cc.Component {
     private dlNode: cc.Node = null;
 
     onLoad(){
+        cc.assetManager.loadBundle('bundle',(err,bubble)=>{
+            if(err){
+                console.log(err)
+            }else{
+                console.log('加载bubble预制体成功')
+                console.log(JSON.stringify(bubble))
+            }
+        })
+        // cc.resources.load(`/bundle/prefab`,(error,assert)=>{
+        //     if(error){
+        //         console.log(error)
+        //     }else{
+        //         console.log('加载bubble预制体成功')
+        //     }
+        // })
     }
 
     onDestroy(){

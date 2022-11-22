@@ -338,9 +338,10 @@ export const NetWork = new class{
                     let sc = res.data.userInfo.socre;
                     let id = res.data.userInfo.uid;
                     let lev = Number(res.data.userInfo.level);
+                    // lev = 0
                     GameDataMgr.setDataByType(E_GameData_Type.AllScoreNum,sc);
                     GameDataMgr.setDataByType(E_GameData_Type.playerID,id);
-                    // GameDataMgr.setDataByType(E_GameData_Type.MaxlevelNum,lev);
+                    GameDataMgr.setDataByType(E_GameData_Type.MaxlevelNum,lev);
                     GameDataMgr.setDataByType(E_GameData_Type.ClickPassLv,lev);
                     console.log("请求成功");
                     callback(true);

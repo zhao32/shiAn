@@ -105,9 +105,9 @@ export default class GameClient extends cc.Component {
         AudioMgr.playBGMusic(audioConfig.M_BGMusic);
         // // let token = GameDataMgr.getDataByType(E_GameData_Type.AppToken);
         // // if(token != null && token != "" && token != undefined){
-        UIManager.openUI("UI_Level");
+        // UIManager.openUI("UI_Level");
         // }else{
-            // UIManager.openUI("UI_Login");
+            UIManager.openUI("UI_Login");
         // }
     }
 

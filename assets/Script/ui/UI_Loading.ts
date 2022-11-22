@@ -44,6 +44,18 @@ export default class UI_Loading extends cc.Component {
             }
         });
 
+        cc.loader.loadResDir("prefab", (err, assets, urls) => {
+            if (!err) {
+                // console.log(JSON.stringify(assets))
+                cc.log(`加载资源${err ? '失败' : '成功'}`)
+                console.log(JSON.stringify(urls))
+            } else {
+                console.error('err:' + err)
+            }
+        });
+
+        
+
     }
 
     onEnable(){

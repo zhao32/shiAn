@@ -70,8 +70,8 @@ export default class NewClass extends cc.Component {
         console.log("加星星：" + star);
         let le = GameDataMgr.getDataByType(E_GameData_Type.MaxlevelNum);
         let lv = GameDataMgr.getDataByType(E_GameData_Type.ClickPassLv);
-        console.log("加星星：" + le);
-        console.log("加星星：" + lv);
+        console.log("加星星：" + le);//20
+        console.log("加星星：" + lv);//21
             if(lv<=le){
                 GameDataMgr.addDataByType(E_GameData_Type.ClickPassLv,1,31);
                 if(lv==le){

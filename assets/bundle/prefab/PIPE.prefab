@@ -493,7 +493,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -549,7 +549,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -906,7 +906,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -1319,7 +1319,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -1375,7 +1375,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -1732,7 +1732,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -1788,7 +1788,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -2145,7 +2145,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -2201,7 +2201,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -2558,7 +2558,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -2614,7 +2614,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -2971,7 +2971,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -3027,7 +3027,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -3384,7 +3384,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -3440,7 +3440,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -3797,7 +3797,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -3853,7 +3853,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -4210,7 +4210,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -4266,7 +4266,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -4623,7 +4623,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -4679,7 +4679,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -5036,7 +5036,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 160,
+      "width": 163,
       "height": 72
     },
     "_anchorPoint": {
@@ -5092,7 +5092,7 @@
       "__uuid__": "ab619f59-b8c8-43a0-89ec-60d4abc2a9cf"
     },
     "_type": 0,
-    "_sizeMode": 1,
+    "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -6083,8 +6083,8 @@
       "__type__": "TypedArray",
       "ctor": "Float64Array",
       "array": [
-        -102.898,
-        -505.5,
+        -181.898,
+        -571.5,
         0,
         0,
         0,
@@ -6147,14 +6147,14 @@
     "node": {
       "__id__": 159
     },
-    "_enabled": true,
+    "_enabled": false,
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 4,
     "_left": 0,
     "_right": 0,
     "_top": 0,
-    "_bottom": 0,
+    "_bottom": -128,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,
@@ -7423,7 +7423,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 350,
+      "width": 420,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -7478,7 +7478,7 @@
     "_useOriginalSize": false,
     "_string": "超过 3 个月的冷冻肉，对人体有害",
     "_N$string": "超过 3 个月的冷冻肉，对人体有害",
-    "_fontSize": 22,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -8107,7 +8107,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 350,
+      "width": 420,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -8120,7 +8120,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        84.03,
+        129.03,
         0,
         0,
         0,
@@ -8162,7 +8162,7 @@
     "_useOriginalSize": false,
     "_string": "超过 3 个月的冷冻肉，对人体有害",
     "_N$string": "超过 3 个月的冷冻肉，对人体有害",
-    "_fontSize": 22,
+    "_fontSize": 27,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -8233,7 +8233,7 @@
       "ctor": "Float64Array",
       "array": [
         0,
-        -74.983,
+        -50.983000000000004,
         0,
         0,
         0,
@@ -8353,7 +8353,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 400,
-      "height": 450.4
+      "height": 570.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -8407,7 +8407,7 @@
     "_useOriginalSize": false,
     "_string": "茶叶经放置过夜后，其中的一些二级胺类物质可以转变形成致癌物——亚硝胺。但二级胺类物质并非茶汤中所特有，而是广泛存在于很多食物中，尤以腌腊制品中含量最多，就算“隔夜茶”有，也是少量的，你想想，你每天喝的茶才几克，残余到最后的就更少，远低于人们从任何一种主食或蔬菜中摄入的量。而且，这种二级胺类物质需要在特定条件下与硝酸盐共同存在、并发生化学反应才能形成亚硝胺，后者才是致癌的，而亚硝胺要达到每千克体重吸收100至200毫克才有可能致癌，你得喝多少隔夜剩茶呀？",
     "_N$string": "茶叶经放置过夜后，其中的一些二级胺类物质可以转变形成致癌物——亚硝胺。但二级胺类物质并非茶汤中所特有，而是广泛存在于很多食物中，尤以腌腊制品中含量最多，就算“隔夜茶”有，也是少量的，你想想，你每天喝的茶才几克，残余到最后的就更少，远低于人们从任何一种主食或蔬菜中摄入的量。而且，这种二级胺类物质需要在特定条件下与硝酸盐共同存在、并发生化学反应才能形成亚硝胺，后者才是致癌的，而亚硝胺要达到每千克体重吸收100至200毫克才有可能致癌，你得喝多少隔夜剩茶呀？",
-    "_fontSize": 18,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -9245,7 +9245,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 350,
+      "width": 420,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -9300,7 +9300,7 @@
     "_useOriginalSize": false,
     "_string": "不添加食品添加剂的食品更安全",
     "_N$string": "不添加食品添加剂的食品更安全",
-    "_fontSize": 22,
+    "_fontSize": 27,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -9683,7 +9683,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 400,
-      "height": 450.4
+      "height": 570.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -9737,7 +9737,7 @@
     "_useOriginalSize": false,
     "_string": "茶叶经放置过夜后，其中的一些二级胺类物质可以转变形成致癌物——亚硝胺。但二级胺类物质并非茶汤中所特有，而是广泛存在于很多食物中，尤以腌腊制品中含量最多，就算“隔夜茶”有，也是少量的，你想想，你每天喝的茶才几克，残余到最后的就更少，远低于人们从任何一种主食或蔬菜中摄入的量。而且，这种二级胺类物质需要在特定条件下与硝酸盐共同存在、并发生化学反应才能形成亚硝胺，后者才是致癌的，而亚硝胺要达到每千克体重吸收100至200毫克才有可能致癌，你得喝多少隔夜剩茶呀？",
     "_N$string": "茶叶经放置过夜后，其中的一些二级胺类物质可以转变形成致癌物——亚硝胺。但二级胺类物质并非茶汤中所特有，而是广泛存在于很多食物中，尤以腌腊制品中含量最多，就算“隔夜茶”有，也是少量的，你想想，你每天喝的茶才几克，残余到最后的就更少，远低于人们从任何一种主食或蔬菜中摄入的量。而且，这种二级胺类物质需要在特定条件下与硝酸盐共同存在、并发生化学反应才能形成亚硝胺，后者才是致癌的，而亚硝胺要达到每千克体重吸收100至200毫克才有可能致癌，你得喝多少隔夜剩茶呀？",
-    "_fontSize": 18,
+    "_fontSize": 24,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
