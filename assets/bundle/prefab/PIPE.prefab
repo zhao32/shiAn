@@ -7404,7 +7404,7 @@
       "__id__": 191
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 196
@@ -7423,7 +7423,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 420,
+      "width": 430,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -7478,7 +7478,7 @@
     "_useOriginalSize": false,
     "_string": "超过 3 个月的冷冻肉，对人体有害",
     "_N$string": "超过 3 个月的冷冻肉，对人体有害",
-    "_fontSize": 24,
+    "_fontSize": 28,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -8100,14 +8100,14 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 95,
+      "g": 95,
+      "b": 95,
       "a": 255
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 420,
+      "width": 428,
       "height": 50.4
     },
     "_anchorPoint": {
@@ -8162,7 +8162,7 @@
     "_useOriginalSize": false,
     "_string": "超过 3 个月的冷冻肉，对人体有害",
     "_N$string": "超过 3 个月的冷冻肉，对人体有害",
-    "_fontSize": 27,
+    "_fontSize": 28,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
@@ -8345,9 +8345,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 123,
+      "g": 123,
+      "b": 123,
       "a": 255
     },
     "_contentSize": {
@@ -9300,7 +9300,7 @@
     "_useOriginalSize": false,
     "_string": "不添加食品添加剂的食品更安全",
     "_N$string": "不添加食品添加剂的食品更安全",
-    "_fontSize": 27,
+    "_fontSize": 28,
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": null,
